@@ -1,7 +1,37 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Store, Clock, Menu as MenuIcon, Image, MapPin, Phone, Globe, Edit, Plus, Trash2 } from 'lucide-react';
 
-const mockRestaurantInfo = {
+interface RestaurantInfo {
+  name: string;
+  category: string;
+  address: string;
+  phone: string;
+  description: string;
+  images: string[];
+}
+
+interface OperatingHours {
+  open: string;
+  close: string;
+  breakStart: string;
+  breakEnd: string;
+  closed: boolean;
+}
+
+interface MenuItem {
+  id: number;
+  category: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  available: boolean;
+  signature: boolean;
+}
+
+type DayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
+
+const mockRestaurantInfo: RestaurantInfo = {
   name: '라비올로',
   category: '이탈리안',
   address: '서울시 강남구 논현로 123',
@@ -14,7 +44,7 @@ const mockRestaurantInfo = {
   ]
 };
 
-const mockOperatingHours = {
+const mockOperatingHours: Record<DayOfWeek, OperatingHours> = {
   monday: { open: '11:00', close: '22:00', breakStart: '15:00', breakEnd: '17:00', closed: false },
   tuesday: { open: '11:00', close: '22:00', breakStart: '15:00', breakEnd: '17:00', closed: false },
   wednesday: { open: '11:00', close: '22:00', breakStart: '15:00', breakEnd: '17:00', closed: false },
@@ -24,7 +54,7 @@ const mockOperatingHours = {
   sunday: { open: '', close: '', breakStart: '', breakEnd: '', closed: true }
 };
 
-const mockMenuItems = [
+const mockMenuItems: MenuItem[] = [
   {
     id: 1,
     category: '파스타',
@@ -67,7 +97,7 @@ export function RestaurantManagement() {
     { id: 'menu', label: '메뉴 관리', icon: MenuIcon },
   ];
 
-  const dayNames = {
+  const dayNames: Record<DayOfWeek, string> = {
     monday: '월요일',
     tuesday: '화요일',
     wednesday: '수요일',
@@ -224,7 +254,7 @@ export function RestaurantManagement() {
               {Object.entries(mockOperatingHours).map(([day, hours]) => (
                 <tr key={day} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {dayNames[day]}
+                    {dayNames[day as DayOfWeek]}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {hours.closed ? '-' : `${hours.open} - ${hours.close}`}

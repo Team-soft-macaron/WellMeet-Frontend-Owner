@@ -1,4 +1,3 @@
-import React from 'react';
 import { Calendar, Users, TrendingUp, Star, Clock, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 

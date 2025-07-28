@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
 import { Dashboard } from './components/Dashboard';
@@ -44,7 +44,7 @@ export default function App() {
     <div className="flex h-screen bg-gray-50">
       <Sidebar 
         currentPage={currentPage} 
-        onPageChange={setCurrentPage}
+        onPageChange={(page) => setCurrentPage(page as Page)}
         collapsed={sidebarCollapsed}
         onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
       />

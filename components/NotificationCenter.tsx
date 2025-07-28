@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Bell, Calendar, Star, AlertCircle, Settings, Check, Trash2, Filter, Search } from 'lucide-react';
 
 interface NotificationCenterProps {
