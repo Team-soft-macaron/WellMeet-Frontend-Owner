@@ -10,8 +10,10 @@ import { ReviewManagement } from './components/ReviewManagement';
 import { Analytics } from './components/Analytics';
 import { Settings } from './components/Settings';
 import { NotificationCenter } from './components/NotificationCenter';
+import { ProfileSettings } from './components/ProfileSettings';
+import { AccountSettings } from './components/AccountSettings';
 
-type Page = 'dashboard' | 'bookings' | 'restaurant' | 'customers' | 'reviews' | 'analytics' | 'settings' | 'notifications';
+type Page = 'dashboard' | 'bookings' | 'restaurant' | 'customers' | 'reviews' | 'analytics' | 'settings' | 'notifications' | 'profile' | 'account';
 
 export default function App() {
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ export default function App() {
 
   useEffect(() => {
     const path = location.pathname.slice(1) || 'dashboard';
-    if (['dashboard', 'bookings', 'restaurant', 'customers', 'reviews', 'analytics', 'settings', 'notifications'].includes(path)) {
+    if (['dashboard', 'bookings', 'restaurant', 'customers', 'reviews', 'analytics', 'settings', 'notifications', 'profile', 'account'].includes(path)) {
       setCurrentPage(path as Page);
     }
   }, [location]);
@@ -30,6 +32,15 @@ export default function App() {
   const handlePageChange = (page: Page) => {
     setCurrentPage(page);
     navigate(`/${page}`);
+  };
+
+  const handleLogout = () => {
+    if (confirm('로그아웃 하시겠습니까?')) {
+      // TODO: API 호출하여 로그아웃 처리
+      // localStorage.removeItem('token');
+      // navigate('/login');
+      alert('로그아웃되었습니다.');
+    }
   };
 
 
@@ -46,6 +57,9 @@ export default function App() {
         <Header 
           unreadNotifications={unreadNotifications}
           onNotificationClick={() => handlePageChange('notifications')}
+          onProfileClick={() => handlePageChange('profile')}
+          onAccountClick={() => handlePageChange('account')}
+          onLogout={handleLogout}
           sidebarCollapsed={sidebarCollapsed}
           onToggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)}
         />
@@ -61,6 +75,8 @@ export default function App() {
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/notifications" element={<NotificationCenter onNotificationsRead={() => setUnreadNotifications(0)} />} />
+            <Route path="/profile" element={<ProfileSettings />} />
+            <Route path="/account" element={<AccountSettings />} />
           </Routes>
         </main>
       </div>
