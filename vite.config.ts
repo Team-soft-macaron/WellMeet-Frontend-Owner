@@ -14,6 +14,6 @@ export default defineConfig({
     }
   },
   server: {
-    historyApiFallback: true
+    // historyApiFallback is handled by default in Vite dev server
   }
 })

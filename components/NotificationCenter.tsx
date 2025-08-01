@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Bell, Calendar, Star, AlertCircle, Settings, Check, Trash2, Search } from 'lucide-react';
+import { Bell, Settings, Check, Trash2, Search } from 'lucide-react';
 
 interface NotificationCenterProps {
   onNotificationsRead: () => void;
